@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICSE Notes | The Grand Line</title>
+    
+    <!-- Google Fonts for a cinematic, One Piece vibe -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Merienda:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* General Body Styling - Oceanic/Grand Line Theme */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Merienda', cursive;
+            background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364); /* Deep ocean gradient */
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Prevents scrolling while on the start screen */
+        body.locked {
+            overflow: hidden;
+        }
+
+        /* --- NEW: Start Screen Overlay --- */
+        .start-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #050505; /* Pitch black/dark grey */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 1.5s ease; /* Smooth fade out */
+        }
+
+        .enter-btn {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            color: #d4af37;
+            background: transparent;
+            border: 3px solid #d4af37;
+            padding: 20px 40px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+            border-radius: 10px;
+            text-align: center;
+            max-width: 90%;
+        }
+
+        .enter-btn:hover {
+            background: #d4af37;
+            color: #050505;
+            box-shadow: 0 0 30px #d4af37;
+            transform: scale(1.05);
+        }
+
+        /* Utility class to fade out the overlay */
+        .fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* --- Existing Website Styling --- */
+
+        /* Top Quote Styling */
+        .quote-container {
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 2rem 1rem;
+            text-align: center;
+            border-bottom: 3px solid #d4af37; /* Pirate Gold border */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        .quote-text {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: #d4af37; /* Gold */
+            max-width: 900px;
+            margin: 0 auto;
+            line-height: 1.5;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        /* Title */
+        h1 {
+            text-align: center;
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            margin-top: 2rem;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Subject Grid (Responsive) */
+        .subjects-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            padding: 2rem;
+            flex: 1; /* Pushes footer to the bottom */
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Individual Subject Cards (Parchment/Wanted Poster Look) */
+        .subject-card {
+            background-color: #f4e4bc; /* Aged parchment color */
+            color: #3e2723; /* Dark brown ink */
+            text-decoration: none;
+            font-size: 1.3rem;
+            font-weight: 700;
+            width: 220px;
+            padding: 2rem 1rem;
+            text-align: center;
+            border: 4px solid #8b4513; /* Wood/leather border */
+            border-radius: 8px;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Hover Effect for PC */
+        .subject-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 15px 25px rgba(0,0,0,0.7);
+            background-color: #fff3d6;
+            color: #b71c1c; /* Changes to red like a bounty poster */
+        }
+
+        /* Footer Styling */
+        footer {
+            background-color: #111;
+            text-align: center;
+            padding: 1.5rem;
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            color: #d4af37;
+            border-top: 2px solid #8b4513;
+            letter-spacing: 3px;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .enter-btn {
+                font-size: 1.5rem;
+            }
+            .quote-text {
+                font-size: 1.1rem;
+            }
+            h1 {
+                font-size: 1.8rem;
+            }
+            .subject-card {
+                width: 100%; /* Makes cards take up full width on mobile */
+                max-width: 300px;
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<!-- The 'locked' class stops the user from scrolling down past the start screen -->
+<body class="locked">
+
+    <!-- NEW: Audio Element -->
+    <!-- 'loop' attribute makes the drums play continuously. Remove 'loop' if you only want it to play once. -->
+    <audio id="themeMusic" loop>
+        <!-- Make sure your mp3 file is named exactly this and is in the same folder -->
+        <source src="drums_of_liberation.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- NEW: Start Screen Overlay -->
+    <div id="startScreen" class="start-overlay">
+        <button id="enterButton" class="enter-btn">Ready to enter into Great Pirate Era?</button>
+    </div>
+
+    <!-- Header Section with Dictated Quote -->
+    <header class="quote-container">
+        <p class="quote-text">
+            "Inherited Will, The Destiny of the Age, and The Dreams of the People. As long as people continue to pursue the meaning of Freedom, these things will never cease to be!"
+        </p>
+    </header>
+
+    <h1>ICSE Grand Line Archive</h1>
+
+    <!-- Subjects Section -->
+    <main class="subjects-grid">
+        <!-- Replace 'YOUR_DRIVE_LINK_HERE' with the actual link to your PDF -->
+        <a href="YOUR_DRIVE_LINK_HERE" target="_blank" class="subject-card">Physics</a>
+        <a href="YOUR_DRIVE_LINK_HERE" target="_blank" class="subject-card">Chemistry</a>
+        <a href="YOUR_DRIVE_LINK_HERE" target="_blank" class="subject-card">Mathematics</a>
+        <a href="YOUR_DRIVE_LINK_HERE" target="_blank" class="subject-card">Biology</a>
+        
+        <!-- Updated History link from previous step -->
+        <a href="https://drive.google.com/uc?id=1skM3KW3imCRtZL3XhvyADN8HkHgQWYdw" target="_blank" class="subject-card">History & Civics</a>
+        
+        <a href="YOUR_DRIVE_LINK_HERE" target="_blank" class="subject-card">Geography</a>
+        <a href="YOUR_DRIVE_LINK_HERE" target="_blank" class="subject-card">English Language</a>
+        <a href="YOUR_DRIVE_LINK_HERE" target="_blank" class="subject-card">English Literature</a>
+        <a href="YOUR_DRIVE_LINK_HERE" target="_blank" class="subject-card">Computer Applications</a>
+        <a href="YOUR_DRIVE_LINK_HERE" target="_blank" class="subject-card">Hindi</a>
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        Made by Gold D Roger
+    </footer>
+
+    <!-- NEW: JavaScript to handle the click event, fade out the overlay, and play the music -->
+    <script>
+        document.getElementById('enterButton').addEventListener('click', function() {
+            const overlay = document.getElementById('startScreen');
+            const audio = document.getElementById('themeMusic');
+            
+            // 1. Play the music
+            audio.play();
+
+            // 2. Start the fade-out effect on the overlay
+            overlay.classList.add('fade-out');
+
+            // 3. Unlock the body so the user can scroll the main website
+            document.body.classList.remove('locked');
+
+            // 4. Completely remove the overlay from the layout after the fade finishes (1.5 seconds)
+            setTimeout(() => {
+                overlay.style.display = 'none';
+            }, 1500);
+        });
+    </script>
+</body>
+</html>
